@@ -1,0 +1,19 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "Data Source=/data/orders.db"
+      Jwt__Issuer: "provamarcusMazza.Api"
+      Jwt__Audience: "provamarcusMazza.Client"
+      Jwt__Key: "CHANGE_THIS_KEY_IN_PRODUCTION_32_CHARS_MINIMUM!"
+      Jwt__ExpirationMinutes: "60"
+    volumes:
+      - order-data:/data
+
+volumes:
+  order-data:
