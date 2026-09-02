@@ -3,6 +3,7 @@ using provamarcusMazza.Application.Common.Interfaces;
 using provamarcusMazza.Application.Orders.Commands.CancelOrder;
 using provamarcusMazza.Domain.Entities;
 using provamarcusMazza.Domain.Enums;
+using Xunit;
 
 namespace provamarcusMazza.UnitTests.Application;
 

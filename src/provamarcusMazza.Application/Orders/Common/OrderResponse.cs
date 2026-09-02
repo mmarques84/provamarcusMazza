@@ -1,3 +1,4 @@
+using provamarcusMazza.Domain.Entities;
 using provamarcusMazza.Domain.Enums;
 
 namespace provamarcusMazza.Application.Orders.Common;
@@ -12,6 +13,7 @@ public sealed record OrderItemResponse(
 public sealed record OrderResponse(
     Guid Id,
     Guid CustomerId,
+    string CustomerName,
     OrderStatus Status,
     DateTime CreatedAt,
     decimal TotalAmount,

@@ -8,6 +8,7 @@ internal static class OrderMapping
         => new(
             order.Id,
             order.CustomerId,
+            order.Customer.Name,
             order.Status,
             order.CreatedAt,
             order.TotalAmount,

@@ -22,14 +22,14 @@ public sealed class Order
 
     public Guid Id { get; private set; }
     public Guid CustomerId { get; private set; }
+    public Customer Customer { get; private set; }
     public OrderStatus Status { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public IReadOnlyCollection<OrderItem> Items => _items.AsReadOnly();
 
-    // Regra exigida pelo teste: o total é calculado no domínio.
     public decimal TotalAmount => _items.Sum(item => item.Total);
 
-    public static Order Create(Guid customerId, IEnumerable<(string ProductName, int Quantity, decimal UnitPrice)> items)
+    public static Order Create(Guid customerId, IEnumerable<(string ProductName, int Quantity, decimal UnitPrice )> items)
     {
         var order = new Order(customerId);
 

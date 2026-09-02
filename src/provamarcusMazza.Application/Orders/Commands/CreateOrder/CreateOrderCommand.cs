@@ -6,7 +6,8 @@ namespace provamarcusMazza.Application.Orders.Commands.CreateOrder;
 public sealed record CreateOrderItem(
     string ProductName,
     int Quantity,
-    decimal UnitPrice);
+    decimal UnitPrice
+    );
 
 public sealed record CreateOrderCommand(
     Guid CustomerId,

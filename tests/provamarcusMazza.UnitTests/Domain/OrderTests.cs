@@ -1,6 +1,7 @@
 using provamarcusMazza.Domain.Common;
 using provamarcusMazza.Domain.Entities;
 using provamarcusMazza.Domain.Enums;
+using Xunit;
 
 namespace provamarcusMazza.UnitTests.Domain;
 

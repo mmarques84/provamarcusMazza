@@ -13,7 +13,14 @@ public sealed class GetOrdersHandler(IOrderRepository orderRepository)
         CancellationToken cancellationToken)
     {
         var (orders, totalCount) = await orderRepository.GetPagedAsync(
-            request.Page, request.PageSize, cancellationToken);
+            request.Page,
+            request.PageSize,
+            request.CustomerName,
+            request.CustomerId,
+            request.Status,
+            request.MinTotal,
+            request.MaxTotal,
+            cancellationToken);
 
         return new PagedResult<OrderResponse>(
             orders.Select(o => o.ToResponse()).ToList(),

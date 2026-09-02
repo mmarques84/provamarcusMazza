@@ -1,6 +1,7 @@
 using Moq;
 using provamarcusMazza.Application.Common.Interfaces;
 using provamarcusMazza.Application.Orders.Commands.CreateOrder;
+using Xunit;
 
 namespace provamarcusMazza.UnitTests.Application;
 

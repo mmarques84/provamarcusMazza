@@ -7,6 +7,7 @@ using provamarcusMazza.Application.Orders.Commands.CreateOrder;
 using provamarcusMazza.Application.Orders.Common;
 using provamarcusMazza.Application.Orders.Queries.GetOrderById;
 using provamarcusMazza.Application.Orders.Queries.GetOrders;
+using provamarcusMazza.Domain.Enums;
 
 namespace provamarcusMazza.Api.Controllers;
 
@@ -24,12 +25,7 @@ public sealed class OrdersController(ISender sender) : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
     }
 
-    [HttpGet]
-    public async Task<ActionResult<PagedResult<OrderResponse>>> GetAll(
-        [FromQuery] int page = 1,
-        [FromQuery] int pageSize = 10,
-        CancellationToken cancellationToken = default)
-        => Ok(await sender.Send(new GetOrdersQuery(page, pageSize), cancellationToken));
+
 
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<OrderResponse>> GetById(
@@ -37,6 +33,32 @@ public sealed class OrdersController(ISender sender) : ControllerBase
         CancellationToken cancellationToken)
         => Ok(await sender.Send(new GetOrderByIdQuery(id), cancellationToken));
 
+    [HttpGet]
+    public async Task<ActionResult<PagedResult<OrderResponse>>> Get(
+    [FromQuery] string? customerName,
+    [FromQuery] Guid? custmoerid,
+    [FromQuery] OrderStatus? status,
+    [FromQuery] decimal? minTotal,
+    [FromQuery] decimal? maxTotal,
+    [FromQuery] DateTime? createdFrom,
+    [FromQuery] DateTime? createdTo,
+    [FromQuery] int page = 1,
+    [FromQuery] int pageSize = 10,
+    CancellationToken cancellationToken = default)
+    {
+        var query = new GetOrdersQuery(
+            customerName, 
+            custmoerid,
+            status,
+            minTotal,
+            maxTotal,
+            createdFrom,
+            createdTo,
+            page,
+            pageSize);
+
+        return Ok(await sender.Send(query, cancellationToken));
+    }
     [HttpPatch("{id:guid}/cancel")]
     public async Task<ActionResult<OrderResponse>> Cancel(
         Guid id,
